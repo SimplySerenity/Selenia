@@ -7,7 +7,7 @@ module Selenium
       # navigates to the specified url
       # waits for either the page source to stop changing or enough time to pass
       def get_fully_loaded(url, options = {})
-        options.reverse_merge!(delay: 30, attempts: 5)
+        options = { delay: 30, attempts: 5 }.merge(options)
 
         navigate.to(url)
 
