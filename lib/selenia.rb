@@ -45,8 +45,7 @@ module Selenia
         # something bad
       end
 
-      reponse = self.class.post('/api/pools/' + @pool_name + '/links', body: { links: links }.to_json)
-      JSON.parse(reponse.body)
+      self.class.post('/api/pools/' + @pool_name + '/links', body: { links: links }.to_json)
     end
 
     def fetch_link()
