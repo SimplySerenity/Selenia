@@ -12,14 +12,15 @@ module Selenium
 
         navigate.to(url)
 
+        attempts = 1
         source = bridge.page_source
-        attempts = 0
+        sleep(options[:delay])
 
-        begin
-          sleep(options[:delay])
+        while source != bridge.page_source and attempts < options[:attempts] do
           source = bridge.page_source
+          sleep(options[:delay])
           attempts += 1
-        end unless source != bridge.page_source and attempts < options[:attempts]
+        end
       end
     end
   end
