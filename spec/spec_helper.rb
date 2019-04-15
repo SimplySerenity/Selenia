@@ -1,4 +1,6 @@
 require "bundler/setup"
+Bundler.setup
+
 require "selenia"
 
 RSpec.configure do |config|

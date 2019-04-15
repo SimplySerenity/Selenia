@@ -27,6 +27,14 @@ module Selenium
 end
 
 module Selenia
+
+  # cleans the given link to make the server's life easier
+  def self.clean_link(link)
+    link
+      .partition('#')[0]
+      .chomp('/')
+  end
+
   class Server
     include HTTParty
 
@@ -43,13 +51,17 @@ module Selenia
 
     def push_links(links)
       if @pool_name == ''
-        # something bad
+        raise 'You have to join a pool before you can push links'
       end
 
       self.class.post('/api/pools/' + @pool_name + '/links', body: { links: links }.to_json)
     end
 
     def fetch_link()
+      if @pool_name == ''
+        raise 'You have to join a pool before you can fetch links'
+      end
+
       reponse = self.class.get('/api/pools/' + @pool_name + '/links')
       JSON.parse(reponse.body)
     end
